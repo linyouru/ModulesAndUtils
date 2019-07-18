@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Redis" />
         <module name="Utils" />
+        <module name="WebSocket" />
       </profile>
     </annotationProcessing>
   </component>

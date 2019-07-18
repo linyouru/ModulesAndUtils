@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Redis" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebSocket" charset="UTF-8" />
   </component>
 </project>
