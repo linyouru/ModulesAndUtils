@@ -12,15 +12,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class ExportWriterUtil {
+
 	/**
-	 * @param 表头
-	 *            List<Map<String,Object>> 每个map包含两个entry 第一个entry key "name"
-	 *            value "新列名" 第二个entry key "id" value "content集合里的列名"
-	 * @param 表内容
-	 *            List<Map<String,Object>>
-	 * @param fos
-	 *            输出流 写出文件格式xlsx
-	 */
+	 * 普通导出
+	 * @param head 每个map包含两个entry 第一个entry key "name"，value "新列名"
+	 * 	           第二个entry key "id"，value "content集合里的列名"
+	 * @param content 表格数据
+	 * @param os 输出流 写出文件格式xlsx
+	 * @Author LinYouRu
+	 * @Date 11:01 2019/7/24
+	 * @return void
+	 **/
 	public static void exportExcel(List<Map<String, Object>> head, List<Map<String, Object>> content, OutputStream os) {
 
 		@SuppressWarnings("resource")
@@ -34,8 +36,6 @@ public class ExportWriterUtil {
 		try {
 			workbook.write(os);
 			os.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class ExportWriterUtil {
 	 * @param head
 	 * @param content
 	 */
-	public static void writeSheet(SXSSFSheet sheet, CellStyle style, List<Map<String, Object>> head,
+	private static void writeSheet(SXSSFSheet sheet, CellStyle style, List<Map<String, Object>> head,
 								  List<Map<String, Object>> content) {
 		SXSSFRow titleRow = sheet.createRow(0);
 
@@ -91,9 +91,9 @@ public class ExportWriterUtil {
 
 	/************ 导出CSV ******************/
 	/**
-	 * @param 导出CSV
+	 * @param
 	 * @param list
-	 * @param os
+	 * @param
 	 */
 	public void exportCSV(List<Map<String, Object>> head,List<Map<String, Object>> list, String outPutPath) {
 		// BufferedWriter bw = new BufferedWriter(
