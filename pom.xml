@@ -13,6 +13,8 @@
         <module>Utils</module>
         <module>WebSocket</module>
         <module>RabbitMQ</module>
+        <module>Learn</module>
+        <module>ActiveMQ</module>
     </modules>
 
     <name>mymodule</name>
