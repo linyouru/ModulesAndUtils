@@ -12,7 +12,7 @@ public class RequestUtil {
 	 * @return 参数map
 	 * @throws Exception
 	 */
-	public  static Map<String, Object> getParameterMap(HttpServletRequest request) throws Exception {
+	public static Map<String, Object> getParameterMap(HttpServletRequest request) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			Map<String, String[]> tempMap = request.getParameterMap();
