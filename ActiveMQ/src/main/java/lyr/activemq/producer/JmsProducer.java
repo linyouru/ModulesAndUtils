@@ -1,5 +1,6 @@
 package lyr.activemq.producer;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.activemq.command.ActiveMQMessage;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
@@ -27,7 +28,7 @@ import java.util.Map;
 public class JmsProducer {
 
     @Resource
-    @Qualifier("firstJmsTemplate")
+    @Qualifier("JmsTemplate")
     private JmsTemplate jmsTemplate;
 
     @Value("${activemq.topic}")
@@ -39,52 +40,49 @@ public class JmsProducer {
     @Value("${activemq.virtual.topic}")
     private String vTopic;
 
-    private void sendMsg(Destination destination, Message msg) {
-        jmsTemplate.convertAndSend(destination, msg);
-    }
 
     /**
      * send msg to queue.
      * @param data
      */
-    public void sendToQueue(String data) {
+    public void sendToQueue(Object data) {
         ActiveMQQueue mqQueue = new ActiveMQQueue(queue);
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
-            msg.setStringProperty("value", data);
+            msg.setStringProperty("data",JSONObject.toJSONString(data));
         } catch (JMSException e) {
             e.printStackTrace();
         }
-        sendMsg(mqQueue, msg);
+        jmsTemplate.convertAndSend(mqQueue, msg);
     }
 
     /**
      * send msg to topic.
      * @param data
      */
-    public void sendToTopic(String data) {
+    public void sendToTopic(Object data) {
         ActiveMQTopic mqTopic = new ActiveMQTopic(topic);
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
-            msg.setStringProperty("value", data);
+            msg.setStringProperty("data",JSONObject.toJSONString(data));
         } catch (JMSException e) {
             e.printStackTrace();
         }
-        sendMsg(mqTopic, msg);
+        jmsTemplate.convertAndSend(mqTopic, msg);
     }
 
     /**
      * send msg to virtual topic.
      * @param data
      */
-    public void sendToVTopic(String data) {
+    public void sendToVTopic(Object data) {
         ActiveMQTopic mqVTopic = new ActiveMQTopic(vTopic);
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
-            msg.setStringProperty("value", data);
+            msg.setStringProperty("data",JSONObject.toJSONString(data));
         } catch (JMSException e) {
             e.printStackTrace();
         }
-        sendMsg(mqVTopic, msg);
+        jmsTemplate.convertAndSend(mqVTopic, msg);
     }
 }

@@ -2,7 +2,6 @@ package lyr.activemq.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -23,49 +22,49 @@ public class JmsConsumer {
 
     private Logger logger = LoggerFactory.getLogger(JmsConsumer.class);
 
-    @JmsListener(destination = "${activemq.topic}", containerFactory = "firstTopicListener")
+    @JmsListener(destination = "${activemq.topic}", containerFactory = "TopicListener")
     @Async // receive msg asynchronously
     public void receiveTopic1(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": topic1===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": topic1===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
     }
 
-    @JmsListener(destination = "${activemq.topic}", containerFactory = "firstTopicListener")
+    @JmsListener(destination = "${activemq.topic}", containerFactory = "TopicListener")
     @Async // receive msg asynchronously
     public void receiveTopic2(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": topic2===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": topic2===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
     }
 
-    @JmsListener(destination = "${activemq.queue}", containerFactory = "firstQueueListener")
+    @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
     @Async
     public void receiveQueue1(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": Queue1===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": Queue1===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
     }
 
-    @JmsListener(destination = "${activemq.queue}", containerFactory = "firstQueueListener")
+    @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
     @Async
     public void receiveQueue2(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": Queue2===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": Queue2===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
     }
 
-    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "firstQueueListener")
+    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicA1(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": vtopic A1===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": vtopic A1===========" + msg.getStringProperty("data"));
     }
 
-    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "firstQueueListener")
+    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicA2(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": vtopic A2===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": vtopic A2===========" + msg.getStringProperty("data"));
     }
 
-    @JmsListener(destination = "${activemq.virtual.topic.B}", containerFactory = "firstQueueListener")
+    @JmsListener(destination = "${activemq.virtual.topic.B}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicB(Message msg) throws JMSException {
-        logger.info(Thread.currentThread().getName() + ": vtopic B===========" + msg.getStringProperty("value"));
+        logger.info(Thread.currentThread().getName() + ": vtopic B===========" + msg.getStringProperty("data"));
     }
 }

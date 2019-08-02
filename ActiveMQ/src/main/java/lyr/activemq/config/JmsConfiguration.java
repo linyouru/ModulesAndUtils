@@ -35,9 +35,16 @@ public class JmsConfiguration {
 
     private Logger logger = LoggerFactory.getLogger(JmsConfiguration.class);
 
-    @Bean(name = "firstConnectionFactory")
-    public ActiveMQConnectionFactory getFirstConnectionFactory(@Value("${spring.activemq.broker-url}") String brokerUrl,
-                                                               @Value("${spring.activemq.user}") String userName, @Value("${spring.activemq.password}") String password)
+    @Value("${spring.activemq.broker-url}")
+    private String brokerUrl;
+    @Value("${spring.activemq.user}")
+    private String userName;
+    @Value("${spring.activemq.password}")
+    private String password;
+
+
+    @Bean(name = "ConnectionFactory")
+    public ActiveMQConnectionFactory getFirstConnectionFactory()
     {
         logger.debug(brokerUrl + " - " + userName);
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
@@ -47,13 +54,13 @@ public class JmsConfiguration {
         return connectionFactory;
     }
 
-    @Bean(name = "firstJmsTemplate")
-    public JmsTemplate getFirstJmsTemplate(@Qualifier("firstConnectionFactory") ConnectionFactory connectionFactory) {
+    @Bean(name = "JmsTemplate")
+    public JmsTemplate getFirstJmsTemplate(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory) {
         return new JmsTemplate(connectionFactory);
     }
 
-    @Bean(name = "firstTopicListener")
-    public DefaultJmsListenerContainerFactory getFirstTopicListener(@Qualifier("firstConnectionFactory") ConnectionFactory connectionFactory)
+    @Bean(name = "TopicListener")
+    public DefaultJmsListenerContainerFactory getFirstTopicListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
@@ -62,8 +69,8 @@ public class JmsConfiguration {
         return factory;
     }
 
-    @Bean(name = "firstQueueListener")
-    public DefaultJmsListenerContainerFactory getFirstQueueListener(@Qualifier("firstConnectionFactory") ConnectionFactory connectionFactory)
+    @Bean(name = "QueueListener")
+    public DefaultJmsListenerContainerFactory getFirstQueueListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
