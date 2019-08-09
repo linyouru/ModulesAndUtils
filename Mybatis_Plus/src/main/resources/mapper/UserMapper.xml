@@ -15,7 +15,7 @@
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap">
-        SELECT * FROM `user`
+        SELECT * FROM "user"
     </select>
 
 </mapper>

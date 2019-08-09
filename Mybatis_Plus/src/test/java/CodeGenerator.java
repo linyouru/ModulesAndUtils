@@ -64,8 +64,8 @@ public class CodeGenerator {
         //策略配置
         StrategyConfig strategy = new StrategyConfig();
         // 命名规则
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setNaming(NamingStrategy.underline_to_camel); //数据库表映射到实体的命名策略
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel); //数据库表字段映射到实体的命名策略, 未指定按照 naming 执行
         //strategy.setSuperEntityClass("com.example.mybatisplus.common.BaseEntity");
         // 实体是否使用Lombok插件
 //        strategy.setEntityLombokModel(true);
@@ -76,6 +76,7 @@ public class CodeGenerator {
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix();//表前缀
+//        strategy.setFieldPrefix();//字段前缀
         mpg.setStrategy(strategy);
 
         // 自定义配置

@@ -3,6 +3,7 @@ package lyr.mybatisplus;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @ClassName MybatisPlusApplication
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @SpringBootApplication
 @MapperScan("lyr.mybatisplus.dao")   //映射mybatis的mapper接口所在的包
+@EnableTransactionManagement //开启事务支持
 public class MybatisPlusApplication {
 
     public static void main(String[] args) {

@@ -3,6 +3,7 @@ package lyr.mybatisplus.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,15 +19,15 @@ import java.sql.SQLException;
 
 
 /**
- * Druid配置类
+ * Druid配置类,单数据源
  * @Author lyr
  * @Date 8:51 2018-08-07
  * @Param
  * @return
  **/
 
-@Configuration
-@PropertySource(value = { "classpath:application-evn.properties" })
+/*@Configuration
+//@PropertySource(value = { "classpath:application-evn.properties" }) //指定配置文件
 public class DruidConfiguration {
 
 
@@ -44,47 +45,47 @@ public class DruidConfiguration {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
 
-    @Value("${spring.datasource.initialSize}")
+    @Value("${spring.datasource.druid.initial-size}")
     private int initialSize;
 
-    @Value("${spring.datasource.minIdle}")
+    @Value("${spring.datasource.druid.min-idle}")
     private int minIdle;
 
-    @Value("${spring.datasource.maxActive}")
+    @Value("${spring.datasource.druid.max-active}")
     private int maxActive;
 
-    @Value("${spring.datasource.maxWait}")
+    @Value("${spring.datasource.druid.max-wait}")
     private int maxWait;
 
-    @Value("${spring.datasource.timeBetweenEvictionRunsMillis}")
+    @Value("${spring.datasource.druid.time-between-eviction-runs-millis}")
     private int timeBetweenEvictionRunsMillis;
 
-    @Value("${spring.datasource.minEvictableIdleTimeMillis}")
+    @Value("${spring.datasource.druid.min-evictable-idle-time-millis}")
     private int minEvictableIdleTimeMillis;
 
-    @Value("${spring.datasource.validationQuery}")
+    @Value("${spring.datasource.druid.validation-query}")
     private String validationQuery;
 
-    @Value("${spring.datasource.testWhileIdle}")
+    @Value("${spring.datasource.druid.test-while-idle}")
     private boolean testWhileIdle;
 
-    @Value("${spring.datasource.testOnBorrow}")
+    @Value("${spring.datasource.druid.test-on-borrow}")
     private boolean testOnBorrow;
 
-    @Value("${spring.datasource.testOnReturn}")
+    @Value("${spring.datasource.druid.test-on-return}")
     private boolean testOnReturn;
 
-    @Value("${spring.datasource.filters}")
+    @Value("${spring.datasource.druid.filters}")
     private String filters;
 
 
-/**
+*//**
      * druidServlet注册
      * @Author lyr
      * @Date 9:34 2018-08-06
      * @Param []
      * @return org.springframework.boot.web.servlet.ServletRegistrationBean
-     **/
+     **//*
 
     @Bean
     public ServletRegistrationBean druidServlet() {
@@ -96,13 +97,13 @@ public class DruidConfiguration {
         return reg;
     }
 
-/**
+*//**
      * druid监控 配置URL拦截策略
      * @Author lyr
      * @Date 9:35 2018-08-06
      * @Param []
      * @return org.springframework.boot.web.servlet.FilterRegistrationBean
-     **/
+     **//*
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
@@ -147,4 +148,4 @@ public class DruidConfiguration {
 
 
 
-}
+}*/

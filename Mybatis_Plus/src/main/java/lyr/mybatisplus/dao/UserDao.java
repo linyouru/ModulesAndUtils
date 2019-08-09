@@ -1,5 +1,6 @@
 package lyr.mybatisplus.dao;
 
+import lyr.mybatisplus.config.TargetDataSource;
 import lyr.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public interface UserDao extends BaseMapper<User> {
 
+    @TargetDataSource(dataSource = "twoDataSource")
     List<User> getAll();
 
 }
