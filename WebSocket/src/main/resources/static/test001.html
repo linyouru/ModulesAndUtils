@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>My WebSocket</title>
+    <title>WebSocket</title>
 </head>
 
 <body>
-Welcome<br/>
-<input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
+user001<br/>
+<input id="text" type="text" /><button onclick="send()">send</button>    <button onclick="closeWebSocket()">close</button>
 <div id="message">
 </div>
 </body>
@@ -16,7 +16,7 @@ Welcome<br/>
 
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
-        websocket = new WebSocket("ws://localhost:8080/websocket");
+        websocket = new WebSocket("ws://localhost:8081/websocket/001");
     }
     else{
         alert('Not support websocket')
@@ -62,5 +62,6 @@ Welcome<br/>
         var message = document.getElementById('text').value;
         websocket.send(message);
     }
+
 </script>
 </html>
