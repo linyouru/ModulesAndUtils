@@ -14,8 +14,12 @@
         id, name, age, email
     </sql>
 
-    <select id="getAll" resultMap="BaseResultMap">
+    <select id="getAllToPgsql" resultMap="BaseResultMap">
         SELECT * FROM "user"
+    </select>
+
+    <select id="getAllToMysql" resultMap="BaseResultMap">
+        SELECT * FROM `user`
     </select>
 
 </mapper>

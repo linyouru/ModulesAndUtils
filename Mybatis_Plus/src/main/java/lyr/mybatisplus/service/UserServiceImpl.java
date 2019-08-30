@@ -26,8 +26,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
     public void getAll() {
-        List<User> all = userDao.getAll();
+        List<User> all = userDao.getAllToPgsql();
+        System.out.println("Pgsql");
         for (User user : all) {
+            System.out.println(user.toString());
+        }
+        List<User> allToMysql = userDao.getAllToMysql();
+        System.out.println("Mysql");
+        for (User user : allToMysql) {
             System.out.println(user.toString());
         }
 

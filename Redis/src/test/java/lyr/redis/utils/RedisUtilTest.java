@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.Map;
+
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={RedisApplication.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)// 指定启动类
@@ -38,6 +40,8 @@ public class RedisUtilTest {
 
     @Test
     public void get() {
+        Object test = redisUtil.get("");
+        System.out.println(111);
     }
 
     @Test
@@ -63,6 +67,8 @@ public class RedisUtilTest {
 
     @Test
     public void hmget() {
+        Map<Object, Object> hmget = redisUtil.hmget("rjtx:dw:token:0e4c7539-953a-4e0f-8f73-a4a4cfa0b9a7");
+        System.out.println(1);
     }
 
     @Test

@@ -16,7 +16,10 @@ import java.util.List;
  */
 public interface UserDao extends BaseMapper<User> {
 
-    @TargetDataSource(dataSource = "twoDataSource")
-    List<User> getAll();
+    @TargetDataSource(dataSource = TargetDataSource.POSTGRESQL)
+    List<User> getAllToPgsql();
+
+    @TargetDataSource(dataSource = TargetDataSource.MYSQL)
+    List<User> getAllToMysql();
 
 }

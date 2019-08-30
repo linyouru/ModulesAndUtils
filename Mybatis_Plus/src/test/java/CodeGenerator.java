@@ -66,12 +66,12 @@ public class CodeGenerator {
         // 命名规则
         strategy.setNaming(NamingStrategy.underline_to_camel); //数据库表映射到实体的命名策略
         strategy.setColumnNaming(NamingStrategy.underline_to_camel); //数据库表字段映射到实体的命名策略, 未指定按照 naming 执行
-        //strategy.setSuperEntityClass("com.example.mybatisplus.common.BaseEntity");
+        //strategy.setSuperEntityClass("com.example.mybatisplus.demo.BaseEntity");
         // 实体是否使用Lombok插件
 //        strategy.setEntityLombokModel(true);
         // 控制层是否使用Rest风格
         strategy.setRestControllerStyle(true);
-        //strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
+        //strategy.setSuperControllerClass("com.baomidou.ant.demo.BaseController");
         strategy.setInclude("user");//表名
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
