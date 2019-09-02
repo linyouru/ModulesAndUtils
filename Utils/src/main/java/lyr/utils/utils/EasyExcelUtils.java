@@ -7,6 +7,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -555,5 +557,51 @@ public class EasyExcelUtils {
             super(cause);
         }
     }
+
+    private static class ModelExcelListener2<E> extends AnalysisEventListener<E> {
+        private List<E> dataList = new ArrayList<E>();
+
+        @Override
+        public void invoke(E object, AnalysisContext context) {
+            dataList.add(object);
+        }
+
+        @Override
+        public void doAfterAllAnalysed(AnalysisContext context) {
+        }
+
+        public List<E> getDataList() {
+            return dataList;
+        }
+
+        @SuppressWarnings("unused")
+        public void setDataList(List<E> dataList) {
+            this.dataList = dataList;
+        }
+    }
+
+    /**
+     * 使用 模型 来读取多sheet Excel
+     *
+     * @param inputStream Excel的输入流
+     * @param clazz 模型的类
+     * @param excelTypeEnum Excel的格式(XLS或XLSX)
+     *
+     * @return 返回 模型 的列表
+     */
+    public static <E> List<E> readMoreExcelWithModel(InputStream inputStream, Class<? extends BaseRowModel> clazz, ExcelTypeEnum excelTypeEnum) {
+        // 解析每行结果在listener中处理
+        List<E> resultList = new ArrayList<>();
+        EasyExcelUtils.ModelExcelListener2<E> listener = new EasyExcelUtils.ModelExcelListener2<E>();
+        ExcelReader excelReader = new ExcelReader(inputStream, excelTypeEnum, null, listener);
+        List<Sheet> sheets = excelReader.getSheets();
+        int excelSize = sheets.size();
+        for (int i=1;i <= excelSize;i++){
+            excelReader.read(new Sheet(i, 1, clazz));
+        }
+        resultList.addAll(listener.getDataList());
+        return resultList;
+    }
+
 
 }
