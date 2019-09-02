@@ -18,6 +18,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface TargetDataSource {
+     String  MYSQL="oneDataSource";
+     String  POSTGRESQL="twoDataSource";
     String dataSource();
 }
 

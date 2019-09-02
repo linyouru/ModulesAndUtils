@@ -28,7 +28,15 @@ public class WebSocketController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @RequestMapping("/sendAllMsg")
+    public void sendAllMsg(){
+        try {
+            webSocket.sendAllMessage("111111111");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

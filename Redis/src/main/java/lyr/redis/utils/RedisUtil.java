@@ -24,7 +24,7 @@ public final class RedisUtil {
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
 
-//    ============================common============================
+//    ============================demo============================
     /**
      * 指定缓存失效时间
      * @param key
