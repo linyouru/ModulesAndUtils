@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 
@@ -162,4 +163,12 @@ public class RedisUtilTest {
     @Test
     public void lRemove() {
     }
+
+    @Test
+    public void jedisTest() {
+        Jedis jedis = new Jedis();
+        jedis.set("test","this a magic!don't touch!");
+        jedis.del("test");
+    }
+
 }
