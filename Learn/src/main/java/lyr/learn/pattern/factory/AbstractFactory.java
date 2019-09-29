@@ -1,4 +1,4 @@
-package lyr.learn.pattern.Factory;
+package lyr.learn.pattern.factory;
 
 /**
  * 抽象工厂
