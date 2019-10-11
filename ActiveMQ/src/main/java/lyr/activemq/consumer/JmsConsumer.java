@@ -40,7 +40,8 @@ public class JmsConsumer {
     @Async
     public void receiveQueue1(Message msg) throws JMSException {
         logger.info(Thread.currentThread().getName() + ": Queue1===========" + msg.getStringProperty("data"));
-        msg.acknowledge(); //消息确认
+//        msg.acknowledge(); //消息确认
+
     }
 
     @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
@@ -50,21 +51,21 @@ public class JmsConsumer {
         msg.acknowledge(); //消息确认
     }
 
-    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
+    /*@JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicA1(Message msg) throws JMSException {
         logger.info(Thread.currentThread().getName() + ": vtopic A1===========" + msg.getStringProperty("data"));
-    }
+    }*/
 
-    @JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
+    /*@JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicA2(Message msg) throws JMSException {
         logger.info(Thread.currentThread().getName() + ": vtopic A2===========" + msg.getStringProperty("data"));
-    }
+    }*/
 
-    @JmsListener(destination = "${activemq.virtual.topic.B}", containerFactory = "QueueListener")
+    /*@JmsListener(destination = "${activemq.virtual.topic.B}", containerFactory = "QueueListener")
     @Async
     public void receiveVTopicB(Message msg) throws JMSException {
         logger.info(Thread.currentThread().getName() + ": vtopic B===========" + msg.getStringProperty("data"));
-    }
+    }*/
 }

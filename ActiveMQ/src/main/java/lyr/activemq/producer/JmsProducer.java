@@ -75,7 +75,7 @@ public class JmsProducer {
      * send msg to virtual topic.
      * @param data
      */
-    public void sendToVTopic(Object data) {
+    /*public void sendToVTopic(Object data) {
         ActiveMQTopic mqVTopic = new ActiveMQTopic(vTopic);
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
@@ -84,5 +84,5 @@ public class JmsProducer {
             e.printStackTrace();
         }
         jmsTemplate.convertAndSend(mqVTopic, msg);
-    }
+    }*/
 }

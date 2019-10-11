@@ -36,12 +36,12 @@ public class ActivemqController {
         }
     }
 
-    @RequestMapping("/sendToVTopic.do")
+    /*@RequestMapping("/sendToVTopic.do")
     public void sendToVTopic(){
         for (int i=0;i<10;i++){
             producer.sendToVTopic("发送给VTopic的第"+i+"条消息");
         }
-    }
+    }*/
 
 
 }

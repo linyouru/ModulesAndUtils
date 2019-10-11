@@ -29,7 +29,7 @@ import javax.jms.ConnectionFactory;
  * @Version 1.0
  **/
 @Configuration
-@EnableAsync // enable asynchronous task
+@EnableAsync // 启用异步任务
 @EnableJms
 public class JmsConfiguration {
 
@@ -41,6 +41,8 @@ public class JmsConfiguration {
     private String userName;
     @Value("${spring.activemq.password}")
     private String password;
+    @Value("${spring.activemq.prefix}")
+    private String prefix;
 
 
     @Bean(name = "ConnectionFactory")
@@ -77,4 +79,16 @@ public class JmsConfiguration {
         factory.setSessionAcknowledgeMode(4); // change acknowledge mode
         return factory;
     }
+
+
+    /**
+     * 配置自定义的注册器
+     * @return
+     */
+    /*@Bean
+    public CustomJmsListenerEndpointRegistry myJmsListenerEndpointRegistry() {
+        CustomJmsListenerEndpointRegistry myJmsListenerEndpointRegistry = new CustomJmsListenerEndpointRegistry();
+        myJmsListenerEndpointRegistry.setPrefix(prefix);
+        return myJmsListenerEndpointRegistry;
+    }*/
 }
