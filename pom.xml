@@ -17,6 +17,7 @@
         <module>ActiveMQ</module>
         <module>Mybatis_Plus</module>
         <module>Quartz</module>
+        <module>Kafka</module>
     </modules>
 
     <name>mymodule</name>
