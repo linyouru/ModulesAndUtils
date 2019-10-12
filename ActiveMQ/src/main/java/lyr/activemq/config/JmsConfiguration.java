@@ -1,6 +1,7 @@
 package lyr.activemq.config;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.RedeliveryPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,20 +46,26 @@ public class JmsConfiguration {
     private String prefix;
 
 
+    //连接工厂
     @Bean(name = "ConnectionFactory")
-    public ActiveMQConnectionFactory getFirstConnectionFactory()
+    public ActiveMQConnectionFactory getFirstConnectionFactory(RedeliveryPolicy redeliveryPolicy)
     {
         logger.debug(brokerUrl + " - " + userName);
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
+        connectionFactory.setRedeliveryPolicy(redeliveryPolicy); //设置消息重发
         return connectionFactory;
     }
 
     @Bean(name = "JmsTemplate")
     public JmsTemplate getFirstJmsTemplate(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory) {
-        return new JmsTemplate(connectionFactory);
+        JmsTemplate jmsTemplate = new JmsTemplate();
+        jmsTemplate.setDeliveryMode(2);//进行持久化配置 1表示非持久化，2表示持久化
+        jmsTemplate.setConnectionFactory(connectionFactory);
+        jmsTemplate.setSessionAcknowledgeMode(4);//客户端签收模式
+        return jmsTemplate;
     }
 
     @Bean(name = "TopicListener")
@@ -71,15 +78,41 @@ public class JmsConfiguration {
         return factory;
     }
 
+    //监听器
     @Bean(name = "QueueListener")
     public DefaultJmsListenerContainerFactory getFirstQueueListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
+        factory.setConcurrency("1-10");//设置连接数
+        factory.setRecoveryInterval(1000L);//重连间隔时间
         factory.setSessionAcknowledgeMode(4); // change acknowledge mode
         return factory;
     }
 
+    /**
+     * 消息重发机制设置
+     * @Author LinYouRu
+     * @Date 9:12 2019/10/12
+     * @return org.apache.activemq.RedeliveryPolicy
+     **/
+    @Bean
+    public RedeliveryPolicy redeliveryPolicy(){
+        RedeliveryPolicy  redeliveryPolicy=   new RedeliveryPolicy();
+        //是否在每次尝试重新发送失败后,增长这个等待时间
+        redeliveryPolicy.setUseExponentialBackOff(true);
+        //重发次数,默认为6次，超过重发次数后消息将被放入死信队列
+        redeliveryPolicy.setMaximumRedeliveries(6);
+        //重发时间间隔,默认为1秒
+        redeliveryPolicy.setInitialRedeliveryDelay(1);
+        //第一次失败后重新发送之前等待500毫秒,第二次失败再等待500 * 2毫秒,这里的2就是value
+        redeliveryPolicy.setBackOffMultiplier(2);
+        //是否避免消息碰撞
+        redeliveryPolicy.setUseCollisionAvoidance(false);
+        //设置重发最大拖延时间-1 表示没有拖延只有UseExponentialBackOff(true)为true时生效
+        redeliveryPolicy.setMaximumRedeliveryDelay(-1);
+        return redeliveryPolicy;
+    }
 
     /**
      * 配置自定义的注册器

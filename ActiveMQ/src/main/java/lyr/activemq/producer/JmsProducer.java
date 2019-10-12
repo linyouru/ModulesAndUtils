@@ -49,7 +49,8 @@ public class JmsProducer {
         ActiveMQQueue mqQueue = new ActiveMQQueue(queue);
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
-            msg.setStringProperty("data",JSONObject.toJSONString(data));
+//            msg.setStringProperty("data",JSONObject.toJSONString(data));
+            msg.setStringProperty("data",data.toString());
         } catch (JMSException e) {
             e.printStackTrace();
         }
