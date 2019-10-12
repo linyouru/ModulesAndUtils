@@ -50,6 +50,7 @@ public class ProducerCallback implements ListenableFutureCallback<SendResult<Str
     //消息发送失败事件
     @Override
     public void onFailure(Throwable ex) {
+        log.info("消息推送失败");
         ex.printStackTrace();
     }
 }
