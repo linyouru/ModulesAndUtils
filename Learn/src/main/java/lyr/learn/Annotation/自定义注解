@@ -1,0 +1,7 @@
+1、了解注解的工作原理
+2、学习使用自定义注解
+
+注解相当于标签
+当开发者使用了Annotation 修饰了类、方法、Field 等成员之后，这些 Annotation 不会自己生效，
+必须由开发者提供相应的代码来提取并处理 Annotation 信息。
+这些处理提取和处理 Annotation 的代码统称为 APT（Annotation Processing Tool)。
