@@ -1,7 +1,6 @@
-package lyr.learn.Java8.lambda;
+package lyr.learn.java8.lambda;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * Lambda 表达式

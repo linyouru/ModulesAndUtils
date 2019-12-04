@@ -46,7 +46,7 @@ public class JmsConfiguration {
     private String prefix;
 
 
-    //连接工厂
+    /**连接工厂*/
     @Bean(name = "ConnectionFactory")
     public ActiveMQConnectionFactory getFirstConnectionFactory(RedeliveryPolicy redeliveryPolicy)
     {
@@ -55,38 +55,46 @@ public class JmsConfiguration {
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
-        connectionFactory.setRedeliveryPolicy(redeliveryPolicy); //设置消息重发
+        //设置消息重发
+        connectionFactory.setRedeliveryPolicy(redeliveryPolicy);
         return connectionFactory;
     }
 
     @Bean(name = "JmsTemplate")
     public JmsTemplate getFirstJmsTemplate(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory) {
         JmsTemplate jmsTemplate = new JmsTemplate();
-        jmsTemplate.setDeliveryMode(2);//进行持久化配置 1表示非持久化，2表示持久化
+        //进行持久化配置 1表示非持久化，2表示持久化
+        jmsTemplate.setDeliveryMode(2);
         jmsTemplate.setConnectionFactory(connectionFactory);
-        jmsTemplate.setSessionAcknowledgeMode(4);//客户端签收模式
+        //客户端签收模式
+        jmsTemplate.setSessionAcknowledgeMode(4);
         return jmsTemplate;
     }
 
+    /**监听器*/
     @Bean(name = "TopicListener")
     public DefaultJmsListenerContainerFactory getFirstTopicListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setPubSubDomain(true); // if topic, set true
+        // if topic, set true
+        factory.setPubSubDomain(true);
         // factory.setSessionAcknowledgeMode(4); // change acknowledge mode
         return factory;
     }
 
-    //监听器
+    /**监听器*/
     @Bean(name = "QueueListener")
     public DefaultJmsListenerContainerFactory getFirstQueueListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setConcurrency("1-10");//设置连接数
-        factory.setRecoveryInterval(1000L);//重连间隔时间
-        factory.setSessionAcknowledgeMode(4); // change acknowledge mode
+        //设置连接数
+        factory.setConcurrency("1-10");
+        //重连间隔时间
+        factory.setRecoveryInterval(1000L);
+        // change acknowledge mode
+        factory.setSessionAcknowledgeMode(4);
         return factory;
     }
 

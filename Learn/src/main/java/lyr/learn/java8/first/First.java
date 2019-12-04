@@ -1,4 +1,4 @@
-package lyr.learn.Java8.first;
+package lyr.learn.java8.first;
 
 /**
  * 接口的默认方法

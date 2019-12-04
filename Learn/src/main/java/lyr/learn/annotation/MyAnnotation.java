@@ -1,4 +1,4 @@
-package lyr.learn.Annotation;
+package lyr.learn.annotation;
 
 
 import java.lang.annotation.*;
