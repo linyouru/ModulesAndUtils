@@ -18,6 +18,7 @@
         <module>Mybatis_Plus</module>
         <module>Quartz</module>
         <module>Kafka</module>
+        <module>JdbcTemplat</module>
     </modules>
 
     <name>mymodule</name>
