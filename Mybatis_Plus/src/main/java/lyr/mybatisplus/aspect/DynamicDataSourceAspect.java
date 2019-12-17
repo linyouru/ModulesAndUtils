@@ -19,10 +19,15 @@ import org.springframework.stereotype.Component;
  * @Date 2019/8/9 15:22
  * @Version 1.0
  **/
+
 @Aspect
 @Component
 public class DynamicDataSourceAspect {
 
+    /**
+     * 切入点
+     * @annotation：用于匹配当前执行方法持有指定注解的方法；
+     **/
     @Pointcut("@annotation(lyr.mybatisplus.config.TargetDataSource)")
     public void point() {
     }
@@ -35,13 +40,16 @@ public class DynamicDataSourceAspect {
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Method targetMethod = methodSignature.getMethod();
+        //判断方式是否添加了@TargetDataSource注解
         if (targetMethod.isAnnotationPresent(TargetDataSource.class)) {
             String targetDataSource = targetMethod.getAnnotation(TargetDataSource.class).dataSource();
             DynamicDataSourceHolder.setDataSource(targetDataSource);
         }
-        Object result = pjp.proceed();// 执行方法
+        // 执行方法
+        Object result = pjp.proceed();
         DynamicDataSourceHolder.clearDataSource();
         return result;
     }
 
 }
+

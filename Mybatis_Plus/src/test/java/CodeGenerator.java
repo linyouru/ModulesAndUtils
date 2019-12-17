@@ -71,7 +71,7 @@ public class CodeGenerator {
 //        strategy.setEntityLombokModel(true);
         // 控制层是否使用Rest风格
         strategy.setRestControllerStyle(true);
-        //strategy.setSuperControllerClass("com.baomidou.ant.demo.BaseController");
+        //strategy.setSuperControllerClass("com.baomidou.ant.demo.BaseController"); // 公共父类
         strategy.setInclude("user");//表名
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);

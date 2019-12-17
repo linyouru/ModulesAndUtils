@@ -15,4 +15,13 @@ public interface UserService extends IService<User> {
 
     void getAll();
 
+    void getuser();
+
+    /**
+     * service层CRUDdemo
+     * @Author LinYouRu
+     * @Date 10:02 2019/12/16
+     * @return void
+     **/
+    void CrudDemo();
 }

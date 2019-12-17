@@ -26,12 +26,12 @@ import java.sql.SQLException;
  * @return
  **/
 
-/*@Configuration
+//@Configuration
 //@PropertySource(value = { "classpath:application-evn.properties" }) //指定配置文件
 public class DruidConfiguration {
 
 
-    private Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
+    /*private Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
 
     @Value("${spring.datasource.url}")
     private String dbUrl;
@@ -76,18 +76,18 @@ public class DruidConfiguration {
     private boolean testOnReturn;
 
     @Value("${spring.datasource.druid.filters}")
-    private String filters;
+    private String filters;*/
 
 
-*//**
+    /**
      * druidServlet注册
      * @Author lyr
      * @Date 9:34 2018-08-06
      * @Param []
      * @return org.springframework.boot.web.servlet.ServletRegistrationBean
-     **//*
+     **/
 
-    @Bean
+    /*@Bean
     public ServletRegistrationBean druidServlet() {
         ServletRegistrationBean reg = new ServletRegistrationBean();
         reg.setServlet(new StatViewServlet());
@@ -95,17 +95,17 @@ public class DruidConfiguration {
         reg.addInitParameter("loginUsername", username);
         reg.addInitParameter("loginPassword", password);
         return reg;
-    }
+    }*/
 
-*//**
+    /**
      * druid监控 配置URL拦截策略
      * @Author lyr
      * @Date 9:35 2018-08-06
      * @Param []
      * @return org.springframework.boot.web.servlet.FilterRegistrationBean
-     **//*
+     **/
 
-    @Bean
+    /*@Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
@@ -144,8 +144,8 @@ public class DruidConfiguration {
             logger.error("druid configuration initialization filter", e);
         }
         return datasource;
-    }
+    }*/
 
 
 
-}*/
+}
