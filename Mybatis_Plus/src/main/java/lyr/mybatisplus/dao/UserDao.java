@@ -22,4 +22,5 @@ public interface UserDao extends BaseMapper<User> {
     @TargetDataSource(dataSource = TargetDataSource.MYSQL)
     List<User> getAllToMysql();
 
+
 }

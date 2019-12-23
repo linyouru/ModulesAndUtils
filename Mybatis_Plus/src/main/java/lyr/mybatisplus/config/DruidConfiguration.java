@@ -27,7 +27,7 @@ import java.sql.SQLException;
  **/
 
 //@Configuration
-//@PropertySource(value = { "classpath:application-evn.properties" }) //指定配置文件
+//@PropertySource(value = { "classpath:application.properties" }) //指定配置文件
 public class DruidConfiguration {
 
 

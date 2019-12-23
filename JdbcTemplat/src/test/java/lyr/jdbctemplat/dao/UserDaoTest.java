@@ -37,4 +37,9 @@ public class UserDaoTest {
         userDao.demo3();
     }
 
+    @Test
+    public void demo4(){
+        userDao.demo4();
+    }
+
 }

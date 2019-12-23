@@ -39,6 +39,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         }
     }
 
+
+    /**
+     * 使用AOP多数据源切换后无法使用默认CRUD操作，原因:sqlSessionFactory替换成mybatis-plusd的MybatisSqlSessionFactoryBean
+     * @Date 10:17 2019/12/23
+     **/
     @Override
     public void getuser(){
         List<User> users = userDao.selectList(null);
@@ -48,18 +53,22 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    public void CrudDemo(){
+    public void crudDemo(){
         User user = new User();
-//        user.setId(5);
-        user.setName("批量插入");
-        user.setAge(55);
-        user.setEmail("qwe@ww.com");
+        user.setName("回事");
+        user.setAge(532);
+        user.setEmail("123@ww.com");
 
+
+        List<User> list = list();
+        for (User user1 : list) {
+            System.out.println(user1);
+        }
+//        userDao.insert(user);
 //        save(user);
-
-        ArrayList<User> userList = new ArrayList<>();
-        userList.add(user);
-        saveBatch(userList);
+//        ArrayList<User> userList = new ArrayList<>();
+//        userList.add(user);
+//        saveBatch(userList);
 
 
     }

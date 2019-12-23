@@ -23,5 +23,5 @@ public interface UserService extends IService<User> {
      * @Date 10:02 2019/12/16
      * @return void
      **/
-    void CrudDemo();
+    void crudDemo();
 }

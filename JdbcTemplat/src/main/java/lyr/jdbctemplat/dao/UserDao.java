@@ -77,4 +77,29 @@ public class UserDao {
         List<User> users = jdbcTemplateOne.query(sql1, BeanPropertyRowMapper.newInstance(User.class));
     }
 
+    /**
+     * 操行分
+     **/
+    void demo4(){
+        String sql = "select name,item from t2";
+        List<Map<String, Object>> list = jdbcTemplateOne.queryForList(sql);
+        for (Map<String, Object> map : list) {
+            String name = map.get("name") + "";
+            String item = map.get("item") + "";
+            if (!"null".equals(item)) {
+                String[] fenshu = item.split("\n");
+                int sum = 80;
+                for (String s : fenshu) {
+                    int i = Integer.valueOf(s);
+                    sum +=i;
+                }
+                System.out.println(name+"："+sum);
+            }else {
+                System.out.println(name+"：没有值可以计算");
+            }
+
+        }
+
+    }
+
 }
