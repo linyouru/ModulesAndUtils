@@ -15,11 +15,38 @@
     </sql>
 
     <select id="getAllToPgsql" resultMap="BaseResultMap">
-        SELECT * FROM "user"
+        SELECT <include refid="Base_Column_List"></include> FROM "user"
     </select>
 
     <select id="getAllToMysql" resultMap="BaseResultMap">
-        SELECT * FROM `user`
+        SELECT <include refid="Base_Column_List"></include> FROM `user`
     </select>
+
+    <select id="findByParams" resultType="lyr.mybatisplus.entity.User">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id = #{param1} and name = #{param2}
+    </select>
+
+    <select id="findByParams2" resultType="lyr.mybatisplus.entity.User">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id = #{id} and name = #{name}
+    </select>
+
+    <select id="findByMapParams" resultType="lyr.mybatisplus.entity.User" parameterType="hashmap">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id = #{id} and name = #{name}
+    </select>
+
+    <select id="findByBeans" resultType="lyr.mybatisplus.entity.User" parameterType="lyr.mybatisplus.entity.User">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id = #{id} and name = #{name}
+    </select>
+    <select id="findByJSONObject" resultType="lyr.mybatisplus.entity.User" parameterType="org.springframework.boot.configurationprocessor.json.JSONObject">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id = #{id} and name = #{name}
+    </select>
+
+    <select id="findByList" resultType="lyr.mybatisplus.entity.User">
+        SELECT <include refid="Base_Column_List"></include> FROM `user` WHERE id IN
+        <foreach collection="list" open="(" separator="," close=")" item="no">
+            #{no}
+        </foreach>
+    </select>
+
 
 </mapper>

@@ -2,6 +2,7 @@ package lyr.mybatisplus.service;
 
 import lyr.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 
 /**
  * <p>
@@ -24,4 +25,6 @@ public interface UserService extends IService<User> {
      * @return void
      **/
     void crudDemo();
+
+    void getUser() throws JSONException;
 }
