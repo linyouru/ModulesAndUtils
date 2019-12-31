@@ -90,8 +90,12 @@ public class UserDao {
                 String[] fenshu = item.split("\n");
                 int sum = 80;
                 for (String s : fenshu) {
-                    int i = Integer.valueOf(s);
-                    sum +=i;
+                    try {
+                        int i = Integer.valueOf(s);
+                        sum +=i;
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
                 }
                 System.out.println(name+"："+sum);
             }else {

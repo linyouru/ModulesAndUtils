@@ -1,5 +1,7 @@
 package lyr.redis.entity;
 
+import java.io.Serializable;
+
 /**
  * 测试redis存储对象的对象
  * @ClassName Tuser
@@ -8,7 +10,7 @@ package lyr.redis.entity;
  * @Date 2019/7/11 9:13
  * @Version 1.0
  **/
-public class Tuser {
+public class Tuser implements Serializable {
 
     private String name;
     private int age;
@@ -47,4 +49,12 @@ public class Tuser {
         this.score = score;
     }
 
+    @Override
+    public String toString() {
+        return "Tuser{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", score=" + score +
+                '}';
+    }
 }
