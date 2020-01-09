@@ -24,7 +24,7 @@ public class ThreadPool {
 
 
 
-        Runnable1 runnable1 = new Runnable1();
+        Runnable1 runnable1 = new Runnable1("线程p");
         for (int i=0;i<10;i++){
 //            pool2.submit(runnable1);
             pool1.submit(runnable1);

@@ -14,23 +14,29 @@ import java.util.concurrent.Executors;
 public class MyRunnable {
 
     public static void main(String[] args) {
-        Runnable1 runnable1 = new Runnable1();
-        //创建连接池
-        ExecutorService pool = Executors.newFixedThreadPool(10);
-        for (int i=0;i<10;i++){
-//            new Thread(runnable1).start();//不建议显示使用线程
-            pool.submit(runnable1);
-        }
-        pool.shutdown();
+        new Thread(new Runnable1("线程3")).start();
+        new Thread(new Runnable1("线程4")).start();
     }
-
 }
 
 
 class Runnable1 implements Runnable{
 
+    private String name;
+
+    public Runnable1(String name) {
+        this.name = name;
+    }
+
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName());
+        for (int i=0;i<10;i++) {
+            System.out.println(name+"：运行"+i);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
