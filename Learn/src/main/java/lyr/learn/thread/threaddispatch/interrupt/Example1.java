@@ -1,4 +1,4 @@
-package lyr.learn.thread.interrupt;
+package lyr.learn.thread.threaddispatch.interrupt;
 
 /**
  * 线程调度-interrupt

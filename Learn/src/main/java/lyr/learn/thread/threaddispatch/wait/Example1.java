@@ -1,4 +1,4 @@
-package lyr.learn.thread.wait;
+package lyr.learn.thread.threaddispatch.wait;
 
 /**
  * 线程调度-wait

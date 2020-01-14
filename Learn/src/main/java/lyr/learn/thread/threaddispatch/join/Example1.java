@@ -1,4 +1,4 @@
-package lyr.learn.thread.join;
+package lyr.learn.thread.threaddispatch.join;
 
 /**
  * 线程调度-join

@@ -1,4 +1,4 @@
-package lyr.learn.thread.interrupt;
+package lyr.learn.thread.threaddispatch.interrupt;
 
 /**
  * 死锁状态线程无法被中断
