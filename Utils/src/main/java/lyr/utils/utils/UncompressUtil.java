@@ -6,6 +6,11 @@ package lyr.utils.utils;
 import com.github.junrar.Archive;
 import com.github.junrar.VolumeManager;
 import com.github.junrar.rarfile.FileHeader;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -21,8 +26,9 @@ import java.util.zip.ZipFile;
  * 
  */
 public class UncompressUtil {
-	
-	
+
+	private static Logger logger = LoggerFactory.getLogger(UncompressUtil.class);
+
 	/**
 	 * 在当前文件夹下解压zip文件，并创建zip文件名的文件夹,返回压缩包下全部文件的路径list
 	 * 创建人：lyr
@@ -187,6 +193,117 @@ public class UncompressUtil {
 	               try{archive.close();archive=null;}catch(Exception e){e.printStackTrace();}    
 	           }    
 	       }
-	} 
+	}
 
+
+	/**
+	 * 解压.gz文件
+	 * @param filePath 文件路径
+	 * @Author LinYouRu
+	 * @Date 16:22 2020/2/5
+	 * @return void
+	 **/
+	public static void unCompressArchiveGz(String filePath){
+
+		logger.info("开始解压文件"+filePath);
+		File file = new File(filePath);
+
+		BufferedOutputStream bos = null;
+		GzipCompressorInputStream gcis=null;
+		String finalName = null;
+		try {
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+
+			String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
+
+			finalName = file.getParent() + File.separator + fileName;
+
+			bos = new BufferedOutputStream(new FileOutputStream(finalName));
+
+			gcis = new GzipCompressorInputStream(bis);
+
+			byte[] buffer = new byte[1024];
+			int read;
+			while((read = gcis.read(buffer)) != -1){
+				bos.write(buffer, 0, read);
+			}
+			gcis.close();
+			bos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(bos!=null){
+				try {
+					bos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(gcis!=null){
+				try {
+					gcis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		unCompressTar(finalName);
+		logger.info("解压文件结束");
+	}
+
+	/**
+	 * 解压.tar文件
+	 * @param finalName
+	 * @Author LinYouRu
+	 * @Date 16:21 2020/2/5
+	 * @return void
+	 **/
+	private static void unCompressTar(String finalName){
+		BufferedOutputStream bos = null;
+		TarArchiveInputStream tais = null;
+		try {
+			File file = new File(finalName);
+			String parentPath = file.getParent();
+			tais = new TarArchiveInputStream(new FileInputStream(file));
+
+			TarArchiveEntry tarArchiveEntry = null;
+
+			while ((tarArchiveEntry = tais.getNextTarEntry()) != null) {
+				String name = tarArchiveEntry.getName();
+				File tarFile = new File(parentPath, name);
+				if (!tarFile.getParentFile().exists()) {
+					tarFile.getParentFile().mkdirs();
+				}
+
+				bos = new BufferedOutputStream(new FileOutputStream(tarFile));
+
+				int read;
+				byte[] buffer = new byte[1024];
+				while ((read = tais.read(buffer)) != -1) {
+					bos.write(buffer, 0, read);
+				}
+				bos.close();
+			}
+			tais.close();
+			file.delete();//删除tar文件
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(bos!=null){
+				try {
+					bos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(tais!=null){
+				try {
+					tais.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
