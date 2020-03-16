@@ -13,7 +13,7 @@
 
     <properties>
         <poiVersion>3.17</poiVersion>
-        <commons-compress.version>1.18</commons-compress.version>
+        <commons-compress.version>1.19</commons-compress.version>
         <easyexcel.version>2.1.6</easyexcel.version>
     </properties>
 
