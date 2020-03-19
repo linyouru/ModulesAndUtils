@@ -22,11 +22,12 @@ public class ActivemqControllerTest {
 
     @Test
     public void sendToQueue() {
-//        controller.sendToQueue();
+        controller.sendToQueue();
     }
 
     @Test
     public void sendToTopic() {
+        controller.sendToTopic();
     }
 
     @Test

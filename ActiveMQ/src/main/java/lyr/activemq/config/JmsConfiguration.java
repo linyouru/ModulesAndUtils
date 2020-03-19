@@ -56,7 +56,7 @@ public class JmsConfiguration {
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
         //设置消息重发
-        connectionFactory.setRedeliveryPolicy(redeliveryPolicy);
+//        connectionFactory.setRedeliveryPolicy(redeliveryPolicy);
         return connectionFactory;
     }
 
@@ -71,7 +71,7 @@ public class JmsConfiguration {
         return jmsTemplate;
     }
 
-    /**监听器*/
+    /**Topic监听器*/
     @Bean(name = "TopicListener")
     public DefaultJmsListenerContainerFactory getFirstTopicListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
@@ -79,11 +79,11 @@ public class JmsConfiguration {
         factory.setConnectionFactory(connectionFactory);
         // if topic, set true
         factory.setPubSubDomain(true);
-        // factory.setSessionAcknowledgeMode(4); // change acknowledge mode
+         factory.setSessionAcknowledgeMode(4);
         return factory;
     }
 
-    /**监听器*/
+    /**Queue监听器*/
     @Bean(name = "QueueListener")
     public DefaultJmsListenerContainerFactory getFirstQueueListener(@Qualifier("ConnectionFactory") ConnectionFactory connectionFactory)
     {
@@ -93,7 +93,6 @@ public class JmsConfiguration {
         factory.setConcurrency("1-10");
         //重连间隔时间
         factory.setRecoveryInterval(1000L);
-        // change acknowledge mode
         factory.setSessionAcknowledgeMode(4);
         return factory;
     }

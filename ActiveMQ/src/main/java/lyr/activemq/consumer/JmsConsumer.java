@@ -40,26 +40,26 @@ public class JmsConsumer {
         msg.acknowledge(); //消息确认
     }
 
-   /* @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
+    @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
     @Async
     public void receiveQueue1(Message msg) throws JMSException {
-        logger.info(thread.currentThread().getName() + ": Queue1===========" + msg.getStringProperty("data"));
+        logger.info(Thread.currentThread().getName() + ": Queue1===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
-    }*/
+    }
 
-    /*@JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
+    @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
     @Async
     public void receiveQueue2(Message msg) throws JMSException {
-        logger.info(thread.currentThread().getName() + ": Queue2===========" + msg.getStringProperty("data"));
+        logger.info(Thread.currentThread().getName() + ": Queue2===========" + msg.getStringProperty("data"));
         msg.acknowledge(); //消息确认
-    }*/
+    }
 
     //消息重发test
-    @JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
+    /*@JmsListener(destination = "${activemq.queue}", containerFactory = "QueueListener")
     @Async
     public void receiveQueue3(Message msg, Session session) throws JMSException {
         try {
-            logger.debug("Consumer收到的报文为:" + msg.getStringProperty("data"));
+            logger.info("Consumer收到的报文为:" + msg.getStringProperty("data"));
             if("发送给Queue的第5条消息".equals(msg.getStringProperty("data"))){
                 logger.info("准备报错");
                 int i = 1/0;
@@ -68,7 +68,7 @@ public class JmsConsumer {
         } catch (Exception e) {
             session.recover();// 此不可省略 重发信息使用
         }
-    }
+    }*/
 
 
     /*@JmsListener(destination = "${activemq.virtual.topic.A}", containerFactory = "QueueListener")

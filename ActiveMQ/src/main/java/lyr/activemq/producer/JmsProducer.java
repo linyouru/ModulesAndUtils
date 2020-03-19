@@ -50,6 +50,7 @@ public class JmsProducer {
         ActiveMQMessage msg = new ActiveMQMessage();
         try {
 //            msg.setStringProperty("data",JSONObject.toJSONString(data));
+            //模拟报错时使用
             msg.setStringProperty("data",data.toString());
         } catch (JMSException e) {
             e.printStackTrace();
