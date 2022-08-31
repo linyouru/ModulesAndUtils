@@ -11,7 +11,7 @@ package lyr.learn.enumtype;
 public class EnumTest {
 
     public static void main(String[] args) {
-        EnumTest enumTest = new EnumTest();
+//        EnumTest enumTest = new EnumTest();
 //        enumTest.bySwitch(Color.GREEN);
 
     }
